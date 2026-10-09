@@ -1,0 +1,101 @@
+@Metadata.layer: #CORE
+@UI: { 
+    headerInfo: { 
+        typeName: 'Items',
+        typeImageUrl: 'https://img.icons8.com/?size=100&id=80857&format=png&color=000000'
+    }
+}
+
+//@UI.chart: [{ 
+//    qualifier: 'itemChart',
+//    chartType: #COLUMN,
+//    description: 'Amount Spent on Each Material',
+//    dimensions: [ 'Material' ],
+//    measures: [ 'Grossvalue' ],
+//    dimensionAttributes: [
+//     { 
+//        dimension: 'Material',
+//        role: #CATEGORY    
+//     }
+//    ],
+//    
+//    measureAttributes: [
+//     { 
+//        measure: 'Grossvalue',
+//        role: #AXIS_1
+//     }
+//    ]
+//}]
+
+//@UI.presentationVariant: [{ 
+//    qualifier: 'itemChartPV',
+//    visualizations: [{ type: #AS_CHART, qualifier: 'itemChart' }]
+//}]
+annotate view ZC_SO_ITEMS with 
+{
+    @UI.facet: [{ 
+        id: 'materialInfo',
+        purpose: #STANDARD,
+        type: #IDENTIFICATION_REFERENCE,
+        label: 'Material Details',
+        position: 10
+    }]
+    
+    @UI.lineItem: [{ position: 10 },
+                   { type: #FOR_ACTION, dataAction: 'zc_so_hdr.addRow', label: 'Add', position: 10} //, invocationGrouping: #CHANGE_SET }
+                  ]
+    @UI.identification: [{ position: 10 }]
+    Material;
+    @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    Unitprice;
+    @UI.lineItem: [{ position: 30 }]
+    @UI.identification: [{ position: 30 }]
+    Quantity;
+    @UI.lineItem: [{ position: 40 }]
+    @UI.identification: [{ position: 40 }]
+    Itemcategory;
+    @UI.lineItem: [{ position: 50 }]
+    @UI.identification: [{ position: 50 }]
+    Shippingmode;
+    @UI.lineItem: [{ position: 60 }]
+    @UI.identification: [{ position: 60 }]
+    Discountpercent;
+    @UI.lineItem: [{ position: 70 }]
+    @UI.identification: [{ position: 70 }]
+    Taxdiscountpercent;
+    @UI.lineItem: [{ position: 80 }]
+    @UI.identification: [{ position: 80 }]
+    Deliveryplant;
+    @UI.lineItem: [{ position: 90 }]
+    @UI.identification: [{ position: 90 }]
+    Storagelocation;
+    @UI.lineItem: [{ position: 100 }]
+    @UI.identification: [{ position: 100 }]
+    Netprice;
+    @UI.lineItem: [{ position: 110 }]
+    @UI.identification: [{ position: 110 }]
+    Netvalue;
+    @UI.lineItem: [{ position: 120 }]
+    @UI.identification: [{ position: 120 }]
+    Grossvalue;
+    @UI.lineItem: [{ position: 130 }]
+    @UI.identification: [{ position: 130 }]
+    Priceelements;
+    @UI.hidden: true
+    Customerid;
+    @UI.hidden: true
+    Itemno;
+    @UI.hidden: true
+    Currency;
+    @UI.hidden: true
+    Units;
+    @UI.hidden: true
+    CreatedBy;
+    @UI.hidden: true
+    CreatedOn;
+    @UI.hidden: true
+    ModifiedBy;
+    @UI.hidden: true
+    ModifiedOn;
+}

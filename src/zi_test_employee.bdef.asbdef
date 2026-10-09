@@ -1,0 +1,33 @@
+managed implementation in class zbp_i_test_employee unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_TEST_EMPLOYEE //alias <alias_name>
+persistent table ztest_employee
+draft table ztest_employee_d
+lock master total etag LocalLastChanged
+authorization master ( instance )
+etag master LocalLastChanged
+{
+  create ( authorization : global );
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly : update ) EmployeeId;
+
+  mapping for ztest_employee
+    {
+      EmployeeId     = employee_id;
+      EmployeeName   = employee_name;
+      DateOfBirth    = date_of_birth;
+      Age            = age;
+      Address        = address;
+      LocalLastChanged = local_lastchanged;
+    }
+}

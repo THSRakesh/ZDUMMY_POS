@@ -1,0 +1,34 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "{{appDescription}}",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "Manage Sales Order"
+  },
+  "ui5AppDetails": {
+    "appId": "zso_mgmt"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_77D5AE82FB486D053DC991F43221A982FDE66F28_TM",
+    "semanticObject": "ZSalesOrder",
+    "action": "create",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_77D5AE82FB486D053DC991F43221A982FDE66F28_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "Manage Sales Order"
+      }
+    }
+  ]
+}

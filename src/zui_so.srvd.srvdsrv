@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition for Sales Order'
+define service ZUI_SO {
+  expose ZC_SO_HDR         as SalesOrderHeader;
+  expose ZC_SO_ITEMS       as SalesOrderItems;
+  expose ZC_SO_ITEMS_CHART as ItemChart;
+}

@@ -1,0 +1,151 @@
+managed implementation in class zbp_i_so_hdr unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_SO_HDR //alias <alias_name>
+persistent table zdt_so_hdr
+draft table zdt_so_hdr_d
+lock master total etag Local_LastChanged
+authorization master ( instance, global )
+etag master Local_LastChanged
+{
+  create ( authorization : global );
+  update;
+  delete;
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( numbering : managed, readonly ) Customerid;
+  field ( readonly ) CreditLimitText, CreditLimitCriticality, Totalitems, Grossvalue, Tax, Discountpercent, Netvalue, Currency, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, Local_LastChanged, CustomerImage;
+  association _items { create; with draft; }
+
+  determination setInitialCreditLimit on modify { create; }
+  validation setInitialCreditLimit1 on save { create; }
+  internal action calculateTotals;
+
+  action ( features : instance ) addRow result [1] $self;
+
+  side effects
+  {
+    entity _items affects field Totalitems,
+        field Grossvalue,
+        field Discountpercent,
+        field Tax,
+        field Netvalue;
+  }
+
+  mapping for zdt_so_hdr
+    {
+      Customerid            = customerid;
+      Customername          = customername;
+      Mobile                = mobile;
+      Email                 = email;
+      Address               = address;
+      Houseno               = houseno;
+      Street                = street;
+      Country               = country;
+      City                  = city;
+      Postalcode            = postalcode;
+      Incoterms             = incoterms;
+      Incotermsloc1         = incotermsloc1;
+      Termsofpayment        = termsofpayment;
+      Paymentmethod         = paymentmethod;
+      Documentcurrency      = documentcurrency;
+      Pricingdate           = pricingdate;
+      Pricelisttype         = pricelisttype;
+      Billingdate           = billingdate;
+      Requesteddeliverydate = requesteddeliverydate;
+      Customergroup         = customergroup;
+      Creditlimit           = creditlimit;
+      Salesorganization     = salesorganization;
+      Distributionchannel   = distributionchannel;
+      Division              = division;
+      Salesoffice           = salesoffice;
+      Salesgroup            = salesgroup;
+      Salesdistrict         = salesdistrict;
+      Note                  = note;
+      Totalitems            = totalitems;
+      Grossvalue            = grossvalue;
+      Tax                   = tax;
+      Discountpercent       = discountpercent;
+      Netvalue              = netvalue;
+      Currency              = currency;
+      CreatedBy             = created_by;
+      CreatedOn             = created_on;
+      ModifiedBy            = modified_by;
+      ModifiedOn            = modified_on;
+      Local_LastChanged     = local_lastchanged;
+    }
+}
+
+define behavior for ZI_SO_ITEMS //alias <alias_name>
+persistent table zdt_so_items
+draft table zdt_so_items_d
+lock dependent by _hdr
+authorization dependent by _hdr
+etag dependent by _hdr
+{
+  update;
+  delete;
+
+  field ( readonly ) Customerid, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn;
+  field ( numbering : managed, readonly ) Itemno;
+  association _hdr { with draft; }
+
+  determination updateHeaderTotals on modify { create; update; delete; }
+
+  side effects
+  {
+    //      field Quantity affects field _hdr.Totalitems,
+    //                             field _hdr.Grossvalue,
+    //                             field _hdr.Tax,
+    //                             field _hdr.Discountpercent,
+    //                             field _hdr.Netvalue;
+
+    field Grossvalue affects field _hdr.Grossvalue;
+
+    field Netvalue affects field _hdr.Netvalue;
+
+    field Discountpercent affects field _hdr.Discountpercent;
+
+    field Taxdiscountpercent affects field _hdr.Tax;
+
+    $self affects field _hdr.Totalitems,
+        field _hdr.Grossvalue,
+        field _hdr.Tax,
+        field _hdr.Discountpercent,
+        field _hdr.Netvalue;
+
+  }
+
+  //static action addRow parameter ZA_ADDROW_ITEMS result [1] $self;
+  //    action ( features : instance ) addRow parameter ZA_ADDROW_ITEMS result [1] $self;
+
+  mapping for zdt_so_items
+    {
+      Customerid         = customerid;
+      Itemno             = itemno;
+      Material           = material;
+      Unitprice          = unitprice;
+      Quantity           = quantity;
+      Itemcategory       = itemcategory;
+      Shippingmode       = shippingmode;
+      Discountpercent    = discountpercent;
+      Taxdiscountpercent = taxdiscountpercent;
+      Deliveryplant      = deliveryplant;
+      Storagelocation    = storagelocation;
+      Netprice           = netprice;
+      Netvalue           = netvalue;
+      Grossvalue         = grossvalue;
+      Priceelements      = priceelements;
+      Currency           = currency;
+      Units              = units;
+      CreatedBy          = created_by;
+      CreatedOn          = created_on;
+      ModifiedBy         = modified_by;
+      ModifiedOn         = modified_on;
+    }
+}

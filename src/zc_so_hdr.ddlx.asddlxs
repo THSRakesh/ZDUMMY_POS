@@ -1,0 +1,274 @@
+@Metadata.layer: #CORE
+@UI: { 
+    headerInfo: { 
+        typeName: 'Point of Sale',
+        title: { 
+            value: 'Customername'
+        },
+        description: {
+            value : 'Mobile'
+        },
+//         typeImageUrl: 'CustomerImage'
+        typeImageUrl: 'https://static.vecteezy.com/system/resources/previews/019/875/701/large_2x/man-in-suit-sitting-with-laptop-businessman-sitting-working-in-front-of-laptop-free-png.png'
+    }
+}
+
+//@UI.chart: [{ 
+//    qualifier: 'itemChart',
+//    chartType: #COLUMN,
+//    dimensions: [ '_itemChart.Material' ],
+//    measures: [ '_itemChart.Grossvalue' ],
+//    dimensionAttributes: [
+//     { 
+//        dimension: '_itemChart.Material',
+//        role: #CATEGORY    
+//     }
+//    ],
+//    
+//    measureAttributes: [
+//     { 
+//        measure: '_itemChart.Grossvalue',
+//        role: #AXIS_1
+//     }
+//    ]
+//}]
+//
+//@UI.presentationVariant: [{
+//    qualifier: 'itemChartPV',
+//    visualizations: [
+//      { type: #AS_CHART, qualifier: 'itemChart' }
+//    ]
+//}]
+annotate view ZC_SO_HDR with 
+{
+    @UI.facet: [
+    {  
+        id: 'headerFacet',
+        purpose: #HEADER,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'image',
+        position: 10    
+    },
+    { 
+        id: 'salesOrder',
+        purpose: #STANDARD,
+        type: #COLLECTION,
+        position: 10
+    },
+    {  
+        id: 'salesOrderHdr',
+        purpose: #STANDARD,
+        type: #COLLECTION,
+        parentId: 'salesOrder',
+        position: 10
+    },
+    { 
+        id: 'custDetailsFacet',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'custDetails',
+        parentId: 'salesOrderHdr',
+        label: 'Customer',
+        position : 10
+    },
+    { 
+        id: 'termsAndCondFacet',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'termsAndCond',
+        parentId: 'salesOrderHdr',
+        label: 'Terms and Conditions',
+        position : 20
+    },
+    { 
+        id: 'priAndBillFacet',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'priceAndBill',
+        parentId: 'salesOrderHdr',
+        label: 'Price and Billing',
+        position : 30
+    },
+    { 
+        id: 'orgDataFacet',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'orgData',
+        parentId: 'salesOrderHdr',
+        label: 'Organizational Data',
+        position : 40
+    },
+    { 
+        id: 'itemsSection',
+        purpose: #STANDARD,
+        type: #COLLECTION,
+        parentId: 'salesOrder',
+        position: 50
+    },
+    { 
+        id: 'materialFacet',
+        purpose: #STANDARD,
+        type: #LINEITEM_REFERENCE,
+        targetElement: '_items',
+        parentId: 'itemsSection',
+        label: 'Items',
+        position : 10
+    },
+    { 
+        id: 'noteFacet',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'note',
+        parentId: 'itemsSection',
+        position : 20
+    },
+    { 
+        id: 'pricingFacet',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'totalPricing',
+        parentId: 'itemsSection',
+        label: 'Total Pricing',
+        position : 30
+    },
+    { 
+        id: 'imageSection',
+        purpose: #STANDARD,
+        type: #COLLECTION,
+        parentId: 'salesOrder',
+        position: 50
+    },
+    { 
+        id: 'UIimage',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'itemImage',
+        parentId: 'imageSection',
+        label: 'Image',
+        position : 10
+    }, 
+    { 
+        id: 'chartFacet',
+        purpose: #STANDARD,
+        type: #CHART_REFERENCE,
+        targetQualifier: 'itemChart',
+        targetElement: '_itemChart',
+        parentId: 'imageSection',
+        label: 'Charts',
+        position: 20
+    }
+    ]
+    @UI.lineItem : [{ position: 10 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 10 }, { qualifier: 'image', position: 10 }]
+    Customername;
+    @UI.lineItem: [{ position : 20 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 20 }, { qualifier: 'image', position: 20 }]
+    Mobile;
+    @UI.lineItem: [{ position : 30 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 30 }, { qualifier: 'image', position: 30 }]
+    Email;
+    @UI.lineItem: [{ position : 40 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 40 }]
+    Address;
+    @UI.lineItem: [{ position : 50 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 50 }]
+    Houseno;
+    @UI.lineItem: [{ position : 60 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 60 }]
+    Street;
+    @UI.lineItem: [{ position : 70 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 70 }]
+    Country;
+    @UI.lineItem: [{ position : 80 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 80 }]
+    City;
+    @UI.lineItem: [{ position : 90 }]
+    @UI.fieldGroup: [{ qualifier: 'custDetails', position: 90 }]
+    Postalcode;
+    
+    @UI.fieldGroup: [{ qualifier: 'termsAndCond', position: 10 }]
+    Incoterms;
+    @UI.fieldGroup: [{ qualifier: 'termsAndCond', position: 20 }]
+    Incotermsloc1;
+    @UI.fieldGroup: [{ qualifier: 'termsAndCond', position: 30 }]
+    Termsofpayment;
+    @UI.fieldGroup: [{ qualifier: 'termsAndCond', position: 40 }]
+    Paymentmethod;
+    @UI.fieldGroup: [{ qualifier: 'termsAndCond', position: 50 }]
+    Documentcurrency;
+    
+    @UI.fieldGroup: [{ qualifier: 'priceAndBill', position: 10 }]
+    @UI.selectionField: [{ position: 10 }]
+    @Consumption.filter.selectionType: #INTERVAL
+    Pricingdate;
+    @UI.fieldGroup: [{ qualifier: 'priceAndBill', position: 20 }]
+    Pricelisttype;
+    @UI.fieldGroup: [{ qualifier: 'priceAndBill', position: 30 }]
+    Billingdate;
+    @UI.fieldGroup: [{ qualifier: 'priceAndBill', position: 40 }]
+    Requesteddeliverydate;
+    @UI.fieldGroup: [{ qualifier: 'priceAndBill', position: 50 }]
+    Customergroup;
+    @UI.fieldGroup: [{ qualifier: 'priceAndBill', position: 60, 
+                       criticality: 'CreditLimitCriticality',
+                       criticalityRepresentation: #WITHOUT_ICON }]
+    CreditLimitText;
+    
+    @UI.fieldGroup: [{ qualifier: 'orgData', position: 10 }]
+    Salesorganization;
+    @UI.fieldGroup: [{ qualifier: 'orgData', position: 20 }]
+    Distributionchannel;
+    @UI.fieldGroup: [{ qualifier: 'orgData', position: 30 }]
+    Division;
+    @UI.fieldGroup: [{ qualifier: 'orgData', position: 40 }]
+    Salesoffice;
+    @UI.fieldGroup: [{ qualifier: 'orgData', position: 50 }]
+    Salesgroup;
+    @UI.fieldGroup: [{ qualifier: 'orgData', position: 60 }]
+    Salesdistrict;
+    
+    @UI.fieldGroup: [{ qualifier: 'note', position: 10 }]
+    @UI.multiLineText: true
+    Note;
+    
+    @UI.fieldGroup: [{ qualifier: 'totalPricing', position: 10 }]
+    Totalitems;
+    @UI.fieldGroup: [{ qualifier: 'totalPricing', position: 20 }]
+    Grossvalue;
+    @UI.fieldGroup: [{ qualifier: 'totalPricing', position: 30 }]
+    Tax;
+    @UI.fieldGroup: [{ qualifier: 'totalPricing', position: 40 }]
+    Discountpercent;
+    @UI.fieldGroup: [{ qualifier: 'totalPricing', position: 50 }]
+    Netvalue;
+    
+    @UI.hidden: true
+    Customerid;
+    @UI.hidden: true
+    Creditlimit;
+    @UI.hidden: true
+    CreditLimitCriticality;
+    @UI.hidden: true
+    Currency;
+    @UI.hidden: true
+    CreatedBy;
+    @UI.hidden: true
+    CreatedOn;
+    @UI.hidden: true
+    ModifiedBy;
+    @UI.hidden: true
+    ModifiedOn;
+    @UI.hidden: true
+    Local_LastChanged;
+    
+    
+    @UI.fieldGroup: [{ qualifier: 'itemImage', position: 10 }]
+    CustomerImage;
+    
+//    @UI.hidden: true
+    @Consumption.valueHelpDefinition: [{  
+        entity: { name: 'ZC_WEEKDAYS_VH', element: 'text' }   //  element: 'value_low'
+    }]
+    @UI.selectionField: [{ position: 20 }]
+    WeekDays;
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Defintion for Employee'
+define service ZUI_TEST_EMP {
+  expose ZC_TEST_EMPLOYEE;
+}

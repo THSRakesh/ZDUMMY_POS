@@ -1,0 +1,33 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZC_SO_HDR //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action addRow;
+
+  side effects {
+    action addRow affects entity _items;
+  }
+
+  use association _items { with draft; }
+}
+
+define behavior for ZC_SO_ITEMS //alias <alias_name>
+{
+  use update;
+  use delete;
+//  use action addRow;
+
+  use association _hdr { with draft; }
+}

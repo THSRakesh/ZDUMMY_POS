@@ -1,0 +1,29 @@
+@Metadata.layer: #CORE
+annotate entity ZC_TEST_EMPLOYEE
+    with 
+{
+    @UI.facet: [{ 
+        id: 'UIEmployee',
+        purpose: #STANDARD,
+        type: #IDENTIFICATION_REFERENCE,
+        label: 'Employee',
+        position: 10
+    }]
+    
+    @UI.lineItem: [ { position: 10 } ]
+    @UI.identification: [ { position: 10 } ]
+    EmployeeId;
+    @UI.lineItem: [ { position: 20 } ]
+    @UI.identification: [ { position: 20 } ]
+    EmployeeName;
+    @UI.lineItem: [ { position: 30 } ]
+    @UI.identification: [ { position: 30 } ]
+    DateOfBirth;
+    @UI.lineItem: [ { position: 40 } ]
+    Age;
+    @UI.lineItem: [ { position: 50 } ]
+    @UI.identification: [ { position: 50 } ]
+    Address;
+    @UI.hidden:true
+    LocalLastChanged;
+}
